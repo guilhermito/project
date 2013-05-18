@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>My Project: Openbenchmarks - Open Source Benchmark Collection</title>
+<title>My Project: Generic sensor interface functions</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -36,7 +36,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
@@ -75,12 +75,41 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#files">Files</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Openbenchmarks - Open Source Benchmark Collection </div>  </div>
+<div class="title">Generic sensor interface functions<div class="ingroups"><a class="el" href="group___p_i_o_s.html">PIOS Core hardware abstraction layer</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Why am i doing this, again ... </p>
-</div></div><!-- contents -->
+
+<p>Generic interface for sensors.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
+Files</h2></td></tr>
+<tr class="memitem:pios__sensors_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pios__sensors_8c.html">pios_sensors.c</a></td></tr>
+<tr class="memdesc:pios__sensors_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic interface for sensors. <br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga382f3e734c0289835d99e3a8410a28bd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga382f3e734c0289835d99e3a8410a28bd"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_i_o_s___s_e_n_s_o_r_s.html#ga382f3e734c0289835d99e3a8410a28bd">PIOS_SENSORS_Init</a> ()</td></tr>
+<tr class="memdesc:ga382f3e734c0289835d99e3a8410a28bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the sensors interface. <br/></td></tr>
+<tr class="separator:ga382f3e734c0289835d99e3a8410a28bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gadd19368ecca5b7d027ce475e3677692b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadd19368ecca5b7d027ce475e3677692b"></a>
+int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_i_o_s___s_e_n_s_o_r_s.html#gadd19368ecca5b7d027ce475e3677692b">PIOS_SENSORS_Register</a> (enum pios_sensor_type type, xQueueHandle queue)</td></tr>
+<tr class="memdesc:gadd19368ecca5b7d027ce475e3677692b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register a sensor with the PIOS_SENSORS interface. <br/></td></tr>
+<tr class="separator:gadd19368ecca5b7d027ce475e3677692b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaec312826a58f6c29ef0a00f56e37cfbc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaec312826a58f6c29ef0a00f56e37cfbc"></a>
+xQueueHandle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___p_i_o_s___s_e_n_s_o_r_s.html#gaec312826a58f6c29ef0a00f56e37cfbc">PIOS_SENSORS_GetQueue</a> (enum pios_sensor_type type)</td></tr>
+<tr class="memdesc:gaec312826a58f6c29ef0a00f56e37cfbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the data queue for a sensor type. <br/></td></tr>
+<tr class="separator:gaec312826a58f6c29ef0a00f56e37cfbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>Generic interface for sensors. </p>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Sat May 18 2013 23:44:37 for My Project by &#160;<a href="http://www.doxygen.org/index.html">

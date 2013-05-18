@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>My Project: Openbenchmarks - Open Source Benchmark Collection</title>
+<title>My Project: vTaskStartScheduler</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -36,7 +36,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
@@ -76,11 +76,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Openbenchmarks - Open Source Benchmark Collection </div>  </div>
+<div class="title">vTaskStartScheduler</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Why am i doing this, again ... </p>
-</div></div><!-- contents -->
+<p>task. h </p>
+<pre>void vTaskStartScheduler( void );</pre><p>Starts the real time kernel tick processing. After calling the kernel has control over which tasks are executed and when. This function does not return until an executing task calls vTaskEndScheduler ().</p>
+<p>At least one task should be created via a call to xTaskCreate () before calling vTaskStartScheduler (). The idle task is created automatically when the first application task is created.</p>
+<p>See the demo application file main.c for an example of creating tasks and starting the kernel.</p>
+<p>Example usage: </p>
+<pre>
+ void vAFunction( void )
+ {
+Create at least one task before starting the kernel.
+     xTaskCreate( vTaskCode, "NAME", STACK_SIZE, NULL, tskIDLE_PRIORITY, NULL );</pre><pre>Start the real time kernel with preemption.
+     vTaskStartScheduler ();</pre><pre>Will not get here unless a task calls vTaskEndScheduler ()
+ }
+   </pre> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Sat May 18 2013 23:44:37 for My Project by &#160;<a href="http://www.doxygen.org/index.html">

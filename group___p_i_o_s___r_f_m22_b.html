@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>My Project: Openbenchmarks - Open Source Benchmark Collection</title>
+<title>My Project: Radio Functions</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -36,7 +36,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
@@ -75,12 +75,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#files">Files</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">Openbenchmarks - Open Source Benchmark Collection </div>  </div>
+<div class="title">Radio Functions<div class="ingroups"><a class="el" href="group___p_i_o_s.html">PIOS Core hardware abstraction layer</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Why am i doing this, again ... </p>
-</div></div><!-- contents -->
+
+<p>PIOS interface for for the RFM22B radio.  
+<a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
+Files</h2></td></tr>
+<tr class="memitem:pios__rfm22b_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pios__rfm22b_8c.html">pios_rfm22b.c</a></td></tr>
+<tr class="memdesc:pios__rfm22b_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements a driver the the RFM22B driver. <br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:pios__rfm22b__com_8c"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pios__rfm22b__com_8c.html">pios_rfm22b_com.c</a></td></tr>
+<tr class="memdesc:pios__rfm22b__com_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implements a driver the the RFM22B driver. <br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:gafc506e8bc70ed8b31b75cbddf28ee660"><td class="memItemLeft" align="right" valign="top">struct pios_com_driver&#160;</td><td class="memItemRight" valign="bottom"><b>pios_rfm22b_com_driver</b></td></tr>
+<tr class="separator:gafc506e8bc70ed8b31b75cbddf28ee660"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<p>PIOS interface for for the RFM22B radio. </p>
+<p>PIOS COM interface for for the RFM22B radio.</p>
+<h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="gafc506e8bc70ed8b31b75cbddf28ee660"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct pios_com_driver pios_rfm22b_com_driver</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    .set_baud   = PIOS_RFM22B_COM_ChangeBaud,</div>
+<div class="line">    .tx_start   = PIOS_RFM22B_COM_TxStart,</div>
+<div class="line">    .rx_start   = PIOS_RFM22B_COM_RxStart,</div>
+<div class="line">    .bind_tx_cb = PIOS_RFM22B_COM_RegisterTxCallback,</div>
+<div class="line">    .bind_rx_cb = PIOS_RFM22B_COM_RegisterRxCallback,</div>
+<div class="line">    .available  = PIOS_RFM22B_COM_Available</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Sat May 18 2013 23:44:37 for My Project by &#160;<a href="http://www.doxygen.org/index.html">

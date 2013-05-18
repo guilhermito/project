@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>My Project: Openbenchmarks - Open Source Benchmark Collection</title>
+<title>My Project: crDELAY</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -36,7 +36,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
@@ -76,11 +76,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Openbenchmarks - Open Source Benchmark Collection </div>  </div>
+<div class="title">crDELAY</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Why am i doing this, again ... </p>
-</div></div><!-- contents -->
+<p>croutine. h </p>
+<pre>
+ crDELAY( xCoRoutineHandle xHandle, portTickType xTicksToDelay );</pre><p>Delay a co-routine for a fixed period of time.</p>
+<p>crDELAY can only be called from the co-routine function itself - not from within a function called by the co-routine function. This is because co-routines do not maintain their own stack.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xHandle</td><td>The handle of the co-routine to delay. This is the xHandle parameter of the co-routine function.</td></tr>
+    <tr><td class="paramname">xTickToDelay</td><td>The number of ticks that the co-routine should delay for. The actual amount of time this equates to is defined by configTICK_RATE_HZ (set in FreeRTOSConfig.h). The constant portTICK_RATE_MS can be used to convert ticks to milliseconds.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Example usage: </p>
+<pre>
+Co-routine to be created.
+ void vACoRoutine( xCoRoutineHandle xHandle, unsigned portBASE_TYPE uxIndex )
+ {
+Variables in co-routines must be declared static if they must maintain value across a blocking call.
+This may not be necessary for const variables.
+We are to delay for 200ms.
+ static const xTickType xDelayTime = 200 / portTICK_RATE_MS;</pre><pre>Must start every co-routine with a call to crSTART();
+     crSTART( xHandle );</pre><pre>     for( ;; )
+     {
+Delay for 200ms.
+        crDELAY( xHandle, xDelayTime );</pre><pre>Do something here.
+     }</pre><pre>Must end every co-routine with a call to crEND();
+     crEND();
+ }</pre> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Sat May 18 2013 23:44:37 for My Project by &#160;<a href="http://www.doxygen.org/index.html">

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>My Project: Openbenchmarks - Open Source Benchmark Collection</title>
+<title>My Project: xSemaphoreTake</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -36,7 +36,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
@@ -76,11 +76,54 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Openbenchmarks - Open Source Benchmark Collection </div>  </div>
+<div class="title">xSemaphoreTake</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Why am i doing this, again ... </p>
-</div></div><!-- contents -->
+<p>semphr. h </p>
+<pre>xSemaphoreTake( 
+                     xSemaphoreHandle xSemaphore, 
+                     portTickType xBlockTime 
+                 )</pre><p><em>Macro</em> to obtain a semaphore. The semaphore must have previously been created with a call to vSemaphoreCreateBinary(), xSemaphoreCreateMutex() or xSemaphoreCreateCounting().</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xSemaphore</td><td>A handle to the semaphore being taken - obtained when the semaphore was created.</td></tr>
+    <tr><td class="paramname">xBlockTime</td><td>The time in ticks to wait for the semaphore to become available. The macro portTICK_RATE_MS can be used to convert this to a real time. A block time of zero can be used to poll the semaphore. A block time of portMAX_DELAY can be used to block indefinitely (provided INCLUDE_vTaskSuspend is set to 1 in FreeRTOSConfig.h).</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pdTRUE if the semaphore was obtained. pdFALSE if xBlockTime expired without the semaphore becoming available.</dd></dl>
+<p>Example usage: </p>
+<pre>
+ xSemaphoreHandle xSemaphore = NULL;</pre><pre>A task that creates a semaphore.
+ void vATask( void * pvParameters )
+ {
+Create the semaphore to guard a shared resource.
+    vSemaphoreCreateBinary( xSemaphore );
+ }</pre><pre>A task that uses the semaphore.
+ void vAnotherTask( void * pvParameters )
+ {
+... Do other things.
+</p>
+<pre class="fragment">if( xSemaphore != NULL )
+{
+</pre><p>
+See if we can obtain the semaphore.  If the semaphore is not available
+wait 10 ticks to see if it becomes free.    
+        if( xSemaphoreTake( xSemaphore, ( portTickType ) 10 ) == pdTRUE )
+        {
+We were able to obtain the semaphore and can now access the
+shared resource.</pre><pre>...</pre><pre>We have finished accessing the shared resource.  Release the 
+semaphore.
+            xSemaphoreGive( xSemaphore );
+        }
+        else
+        {
+We could not obtain the semaphore and can therefore not access
+the shared resource safely.
+        }
+    }
+ }
+ </pre> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Sat May 18 2013 23:44:37 for My Project by &#160;<a href="http://www.doxygen.org/index.html">

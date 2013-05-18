@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>My Project: Openbenchmarks - Open Source Benchmark Collection</title>
+<title>My Project: xTaskResumeAll</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -36,7 +36,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
@@ -76,11 +76,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Openbenchmarks - Open Source Benchmark Collection </div>  </div>
+<div class="title">xTaskResumeAll</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Why am i doing this, again ... </p>
-</div></div><!-- contents -->
+<p>task. h </p>
+<pre>char xTaskResumeAll( void );</pre><p>Resumes real time kernel activity following a call to vTaskSuspendAll (). After a call to vTaskSuspendAll () the kernel will take control of which task is executing at any time.</p>
+<dl class="section return"><dt>Returns</dt><dd>If resuming the scheduler caused a context switch then pdTRUE is returned, otherwise pdFALSE is returned.</dd></dl>
+<p>Example usage: </p>
+<pre>
+ void vTask1( void * pvParameters )
+ {
+     for( ;; )
+     {
+Task code goes here.</pre><pre>...</pre><pre>At some point the task wants to perform a long operation during
+which it does not want to get swapped out.  It cannot use
+taskENTER_CRITICAL ()/taskEXIT_CRITICAL () as the length of the
+operation may cause interrupts to be missed - including the
+ticks.</pre><pre>Prevent the real time kernel swapping out the task.
+         vTaskSuspendAll ();</pre><pre>Perform the operation here.  There is no need to use critical
+sections as we have all the microcontroller processing time.
+During this time interrupts will still operate and the real
+time kernel tick count will be maintained.</pre><pre>...</pre><pre>The operation is complete.  Restart the kernel.  We want to force
+a context switch - but there is no point if resuming the scheduler
+caused a context switch already.
+         if( !xTaskResumeAll () )
+         {
+              taskYIELD ();
+         }
+     }
+ }
+   </pre> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Sat May 18 2013 23:44:37 for My Project by &#160;<a href="http://www.doxygen.org/index.html">

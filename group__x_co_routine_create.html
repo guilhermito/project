@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>My Project: Openbenchmarks - Open Source Benchmark Collection</title>
+<title>My Project: xCoRoutineCreate</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -36,7 +36,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
@@ -76,11 +76,58 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Openbenchmarks - Open Source Benchmark Collection </div>  </div>
+<div class="title">xCoRoutineCreate</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Why am i doing this, again ... </p>
-</div></div><!-- contents -->
+<p>croutine. h </p>
+<pre>
+ portBASE_TYPE xCoRoutineCreate(
+                                 crCOROUTINE_CODE pxCoRoutineCode,
+                                 unsigned portBASE_TYPE uxPriority,
+                                 unsigned portBASE_TYPE uxIndex
+                               );</pre><p>Create a new co-routine and add it to the list of co-routines that are ready to run.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pxCoRoutineCode</td><td>Pointer to the co-routine function. Co-routine functions require special syntax - see the co-routine section of the WEB documentation for more information.</td></tr>
+    <tr><td class="paramname">uxPriority</td><td>The priority with respect to other co-routines at which the co-routine will run.</td></tr>
+    <tr><td class="paramname">uxIndex</td><td>Used to distinguish between different co-routines that execute the same function. See the example below and the co-routine section of the WEB documentation for further information.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>pdPASS if the co-routine was successfully created and added to a ready list, otherwise an error code defined with ProjDefs.h.</dd></dl>
+<p>Example usage: </p>
+<pre>
+Co-routine to be created.
+ void vFlashCoRoutine( xCoRoutineHandle xHandle, unsigned portBASE_TYPE uxIndex )
+ {
+Variables in co-routines must be declared static if they must maintain value across a blocking call.
+This may not be necessary for const variables.
+ static const char cLedToFlash[ 2 ] = { 5, 6 };
+ static const portTickType uxFlashRates[ 2 ] = { 200, 400 };</pre><pre>Must start every co-routine with a call to crSTART();
+     crSTART( xHandle );</pre><pre>     for( ;; )
+     {
+This co-routine just delays for a fixed period, then toggles
+an LED.  Two co-routines are created using this function, so
+the uxIndex parameter is used to tell the co-routine which
+LED to flash and how long to delay.  This assumes xQueue has
+already been created.
+         vParTestToggleLED( cLedToFlash[ uxIndex ] );
+         crDELAY( xHandle, uxFlashRates[ uxIndex ] );
+     }</pre><pre>Must end every co-routine with a call to crEND();
+     crEND();
+ }</pre><pre>Function that creates two co-routines.
+ void vOtherFunction( void )
+ {
+ unsigned char ucParameterToPass;
+ xTaskHandle xHandle;</pre><pre>Create two co-routines at priority 0.  The first is given index 0
+so (from the code above) toggles LED 5 every 200 ticks.  The second
+is given index 1 so toggles LED 6 every 400 ticks.
+     for( uxIndex = 0; uxIndex &lt; 2; uxIndex++ )
+     {
+         xCoRoutineCreate( vFlashCoRoutine, 0, uxIndex );
+     }
+ }
+   </pre> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Sat May 18 2013 23:44:37 for My Project by &#160;<a href="http://www.doxygen.org/index.html">

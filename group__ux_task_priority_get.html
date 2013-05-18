@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>My Project: Openbenchmarks - Open Source Benchmark Collection</title>
+<title>My Project: uxTaskPriorityGet</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -36,7 +36,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
@@ -76,11 +76,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Openbenchmarks - Open Source Benchmark Collection </div>  </div>
+<div class="title">uxTaskPriorityGet</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Why am i doing this, again ... </p>
-</div></div><!-- contents -->
+<p>task. h </p>
+<pre>unsigned portBASE_TYPE uxTaskPriorityGet( xTaskHandle pxTask );</pre><p>INCLUDE_xTaskPriorityGet must be defined as 1 for this function to be available. See the configuration section for more information.</p>
+<p>Obtain the priority of any task.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pxTask</td><td>Handle of the task to be queried. Passing a NULL handle results in the priority of the calling task being returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The priority of pxTask.</dd></dl>
+<p>Example usage: </p>
+<pre>
+ void vAFunction( void )
+ {
+ xTaskHandle xHandle;</pre><pre>Create a task, storing the handle.
+     xTaskCreate( vTaskCode, "NAME", STACK_SIZE, NULL, tskIDLE_PRIORITY, &amp;xHandle );</pre><pre>...</pre><pre>Use the handle to obtain the priority of the created task.
+It was created with tskIDLE_PRIORITY, but may have changed
+it itself.
+     if( uxTaskPriorityGet( xHandle ) != tskIDLE_PRIORITY )
+     {
+The task has changed it's priority.
+     }</pre><pre>...</pre><pre>Is our priority higher than the created task?
+     if( uxTaskPriorityGet( xHandle ) &lt; uxTaskPriorityGet( NULL ) )
+     {
+Our priority (obtained using NULL handle) is higher.
+     }
+ }
+   </pre> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Sat May 18 2013 23:44:37 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
